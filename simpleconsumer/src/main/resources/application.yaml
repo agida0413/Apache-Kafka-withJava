@@ -1,0 +1,19 @@
+server:
+  port: 8086
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092,localhost:9093,localhost:9094  # 로컬호스트에 노출된 브로커 포트
+    consumer:
+      group-id: no-patition
+      auto-offset-reset: latest         # 처음 시작 시 가장 오래된 오프셋부터 읽음
+      enable-auto-commit: false           # 자동 커밋 비활성화 (권장)
+#      auto-commit-interval: 100           # 자동 커밋 활성 시 커밋 주기 (ms)
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      max-poll-records: 10                # 한 번 poll 시 최대 레코드 수
+    listener:
+      ack-mode: manual                   # 수동 커밋 모드
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
